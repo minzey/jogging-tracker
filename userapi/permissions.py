@@ -7,11 +7,12 @@ class IsUserManagerOrAdmin(permissions.IsAuthenticated):
     Custom permission to only allow User managers and Admins to perform CRUD operations
     """
     def has_permission(self, request, view):
-        return bool(request.user.role in [FitnessUser.Role.USER_MANAGER.value, FitnessUser.Role.ADMIN.value])
+        return bool(request.user.role in [FitnessUser.Role.MANAGER.value, FitnessUser.Role.ADMIN.value])
 
     def has_object_permission(self, request, view, obj):
 
         return self.has_permission(request, view)
+
 
 class IsRegularAndOwner(permissions.IsAuthenticated):
     """
@@ -23,6 +24,6 @@ class IsRegularAndOwner(permissions.IsAuthenticated):
 
     def has_object_permission(self, request, view, obj):
 
-        return bool(request.user.role == FitnessUser.Role.REGULAR.value and \
-               obj.id == request.user.id)
+        return bool(request.user.role == FitnessUser.Role.USER.value and \
+                    obj.id == request.user.id)
 
