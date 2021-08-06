@@ -4,6 +4,7 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from django.http import JsonResponse
 
+from utils.filter_parser import PrecedenceQueryFilter
 from .models import JogRecord
 from userapi.models import FitnessUser
 from .serializers import JogRecordSerializer
@@ -14,16 +15,18 @@ from rest_framework.exceptions import PermissionDenied, NotFound
 from .reports import weekly_distance_and_speed_average
 
 
-class JogCreate(generics.CreateAPIView):
-    """
-    API for creating jog records
-    """
-    permission_classes = (IsAuthenticated,)
+class JogList(generics.ListCreateAPIView):
+    permission_classes = (IsJogRecordOwnerOrStaff,)
     serializer_class = JogRecordSerializer
+    filter_backends = (PrecedenceQueryFilter,)
 
-class JogList(generics.ListAPIView):
-    # todo: add filter queryset support
-    pass
+    def get_queryset(self):
+        all_records = JogRecord.objects.all()
+
+        if self.request.user.role == FitnessUser.Role.ADMIN:
+            return all_records
+        else:
+            return all_records.filter(jogger=self.request.user)
 
 
 class JogDetail(generics.RetrieveUpdateDestroyAPIView):

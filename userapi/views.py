@@ -55,12 +55,6 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     permission_classes = (IsUserManagerOrAdmin,)
     serializer_class = FitnessStaffSerializer
-    # def get_serializer_class(self):
-    #     if self.request.user.role == FitnessUser.Role.USER.value:
-    #         return FitnessUserSerializer
-    #     else:
-    #         return FitnessStaffSerializer
-    # todo: list, retrieve, and delete records accessible to logged in user's role. Add pagination and filter to list view
 
     def get_queryset(self):
         all_users = FitnessUser.objects.all()

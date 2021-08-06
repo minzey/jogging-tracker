@@ -4,9 +4,7 @@ def weekly_distance_and_speed_average(jogger, week_start_date, week_end_date):
     """
     Computes weekly average for a given jogger and week.
     """
-    print(jogger)
     jog_objs = JogRecord.objects.filter(jogger=jogger, date__range=[week_start_date, week_end_date])
-    print(jog_objs)
     total_distance = 0
     total_time = 0
     for jog_obj in jog_objs:
@@ -19,11 +17,11 @@ def weekly_distance_and_speed_average(jogger, week_start_date, week_end_date):
         total_speed = 0
 
     data = {
-        "average_distance": round(total_distance / 7, 2),
-        "average_speed": round(total_speed / 7, 2),
         "jogger_id": jogger.id,
         "week_start_date": week_start_date.strftime("%Y-%m-%d"),
-        "week_end_date": week_end_date.strftime("%Y-%m-%d")
+        "week_end_date": week_end_date.strftime("%Y-%m-%d"),
+        "average_distance": round(total_distance / 7, 2),
+        "average_speed": round(total_speed / 7, 2)
     }
 
     return data
