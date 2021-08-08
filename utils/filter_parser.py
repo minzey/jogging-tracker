@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q  # used when string with Q objects is evaluated
 from pyparsing import nestedExpr
 from rest_framework import filters
 

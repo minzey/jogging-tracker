@@ -18,6 +18,7 @@ class JogRecordSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['jogger_id'] = instance.jogger.id
+
         return data
 
     def validate(self, attrs):

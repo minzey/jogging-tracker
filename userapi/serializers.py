@@ -26,6 +26,7 @@ class FitnessUserSerializer(serializers.ModelSerializer):
         if password is not None:
             instance.set_password(password)
         instance.save()
+        validated_data['password'] = password
         return instance
 
 
@@ -45,6 +46,7 @@ class FitnessStaffSerializer(FitnessUserSerializer):
         logged_in_user = self.context['request'].user
         logged_in_user_role = logged_in_user.role
 
+        # will only be called in case of create as user managers cannot retrieve admin users
         role_in_request = attrs.get('role', 0)
 
         if logged_in_user_role < role_in_request:
