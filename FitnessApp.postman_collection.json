@@ -1,0 +1,1518 @@
+{
+	"info": {
+		"_postman_id": "224f9dd5-0fb9-4e80-a8e1-20a1873fb9e2",
+		"name": "FitnessApp",
+		"description": "App to track jogging details of users with multiple types of roles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User (regular)",
+					"item": [
+						{
+							"name": "Register User",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"regularswati\",\r\n    \"password\": \"regularswati\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/register/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register",
+										""
+									]
+								},
+								"description": "Registers regular users i.e. users with role = 0"
+							},
+							"response": [
+								{
+									"name": "Register User",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"user2\",\r\n    \"password\": \"user2\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/register/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"register",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sun, 08 Aug 2021 08:07:03 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "POST, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "68"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"detail\": \"Registration successful! Now you can use the login API\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Retrieve My Account",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/myaccount/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"myaccount",
+										""
+									]
+								},
+								"description": "Retrieves account details of currently logged in user"
+							},
+							"response": [
+								{
+									"name": "Retrieve My Account",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/myaccount/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"myaccount",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 06 Aug 2021 19:58:36 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "27"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 4,\n    \"username\": \"admin\"\n}"
+								}
+							]
+						}
+					],
+					"description": "Endpoints in this folder are accessible by all users."
+				},
+				{
+					"name": "Staff",
+					"item": [
+						{
+							"name": "Get Auth Roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/roles/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"roles",
+										""
+									]
+								},
+								"description": "Returns all auth roles defined for Fitness App"
+							},
+							"response": [
+								{
+									"name": "Get Auth Roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/roles/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"roles",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sun, 08 Aug 2021 08:09:46 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "56"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"0\": \"Regular User\",\n    \"1\": \"User Manager\",\n    \"2\": \"Admin\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Register Staff",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI3NTg5NDU2LCJqdGkiOiIxNzM0YWY4NzRhOWM0MWQzOTI2NjRjMmVjNzliMjM2YyIsInVzZXJfaWQiOjN9.r_sE7uvZ6BkpSuiv2M4Xnsyadco2hwZhQK9u5wqktoU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"usermanager\",\r\n    \"password\": \"usermanager\",\r\n    \"role\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/users/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"users",
+										""
+									]
+								},
+								"description": "Staff can register regular users and other staff using this endpoint. \nA user manager can only register regular users and other user managers.\nAdmins can register regular users, user managers and other admins."
+							},
+							"response": [
+								{
+									"name": "Create User with Role",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"admin3\",\r\n    \"password\": \"admin3\",\r\n    \"role\": 2\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/users/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"users",
+												""
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 05 Aug 2021 18:38:23 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "83"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"detail\": \"You cannot create/update a user with a more privileged role than yours\"\n}"
+								}
+							]
+						},
+						{
+							"name": "List Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/users/?filter=(role eq 0)",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"users",
+										""
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "(role eq 0)"
+										}
+									]
+								},
+								"description": "Lists all users with an auth role less than equal to that of logged in user.\nAccepts parenthesis filter query param to return a paginated response of filtered users."
+							},
+							"response": [
+								{
+									"name": "List Users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/users/?filter=(role eq 0)",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"users",
+												""
+											],
+											"query": [
+												{
+													"key": "filter",
+													"value": "(role eq 0)"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sun, 08 Aug 2021 08:04:42 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "177"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"username\": \"updated_regular_swati\",\n            \"user_role\": \"Regular User\"\n        },\n        {\n            \"id\": 2,\n            \"username\": \"super\",\n            \"user_role\": \"Regular User\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Retrieve User Detail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/users/2/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"users",
+										"2",
+										""
+									]
+								},
+								"description": "Retrieves user details of user with user_id passed in url.\nUser managers cannot view user details of admins.\nAdmins can view user details of any user."
+							},
+							"response": [
+								{
+									"name": "Retrieve User Detail",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/users/5/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"users",
+												"5",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sun, 08 Aug 2021 08:15:15 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "60"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 5,\n    \"username\": \"usermanager\",\n    \"user_role\": \"User Manager\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update User Full",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user_manager\",\r\n    \"password\": \"usermanager\",\r\n    \"role\": 1 \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/users/4/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"users",
+										"4",
+										""
+									]
+								},
+								"description": "Updates user details of user with user_id passed in URL.\nAll fields - username, password, and role are mandatory when using this endpoint.\nUser managers cannot update details of admins, and cannot promote normal/user managers to admin role."
+							},
+							"response": [
+								{
+									"name": "Update User",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"regular_user_update\",\r\n    \"password\": \"regular_user_update\",\r\n    \"role\": 1 \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/users/2/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"users",
+												"2",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sun, 08 Aug 2021 08:16:52 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "68"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 2,\n    \"username\": \"regular_user_update\",\n    \"user_role\": \"User Manager\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update User Partially",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user_manager_new\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/users/4/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"users",
+										"4",
+										""
+									]
+								},
+								"description": "Updates user details of user with user_id passed in URL. \nUpdates the fields that are specified in request.\n\nUser managers cannot update details of admins, and cannot promote normal/user managers to admin role."
+							},
+							"response": [
+								{
+									"name": "Update User Partially",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"role\": 2\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{fitness_url}}/api/auth/users/6/",
+											"host": [
+												"{{fitness_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"users",
+												"6",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 05 Aug 2021 17:54:24 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.9.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "48"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 6,\n    \"username\": \"admin2\",\n    \"user_role\": \"Admin\"\n}"
+								}
+							]
+						}
+					],
+					"description": "Endpoints in this folder are only accessible by staff users i.e. user managers and admins."
+				},
+				{
+					"name": "Login and Obtain Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = JSON.parse(responseBody);\r",
+									"console.log(res)\r",
+									"pm.collectionVariables.set(\"TOKEN\", res.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"fitnessappadmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fitness_url}}/api/auth/login/",
+							"host": [
+								"{{fitness_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login and Obtain Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"fitnessappadmin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/login/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 08 Aug 2021 08:03:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "438"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyODQ5NjE5MCwianRpIjoiZjM2NTJlODY2N2Q5NDUwYjkwODhkODZkYWVjYzBlMjEiLCJ1c2VyX2lkIjo0fQ.s2vh4sJM4BMOptaJAiDgU5cazxmMLIBKKDfGNh__OjY\",\n    \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDExNTkwLCJqdGkiOiI2MjNmMDZkYjQyZmY0NWE2YjAwNmU5YWFkYTliMzQyOCIsInVzZXJfaWQiOjR9.uqJR3EQPbD8DqhPvMvsuO3rxjCYDdhFSg3Jmz3_eJ_E\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Access Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyNzY3MzExNiwianRpIjoiNTZkMjYzOTc2NDg1NGM1ODg1MTQ1MGY4NDVlMGYyOWMiLCJ1c2VyX2lkIjoyfQ.VIXCQSPQXK6Elx9xuO2hPOuNiD-KRmqA4B2ro-EZpkk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fitness_url}}/api/auth/login/refresh/",
+							"host": [
+								"{{fitness_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Refresh Access Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyODI2MjI2OSwianRpIjoiYzViMGQyYjA2MTFjNGExYTk2Y2YxMjczYzJiNjE4YjIiLCJ1c2VyX2lkIjo0fQ.JKEe0c-KAkUNW24cfFHZ83W6ubXm8oeuYn5F-UnrGfw\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/auth/login/refresh/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Aug 2021 17:49:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4MTg3NTU1LCJqdGkiOiJkM2E2Y2Y1ZTc1YzY0NWU4YmIyNzYzYWY0MTVkZDk0YiIsInVzZXJfaWQiOjR9.EZg-LHQA4BtmZ_ptLHSw9TkWA53wiul8xRb9Xg5eTLE\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Authorization and user management related APIs"
+		},
+		{
+			"name": "Jogging",
+			"item": [
+				{
+					"name": "List Jog Record",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jogger_id\": 1,\r\n    \"distance\": 800,\r\n    \"time\": 800,\r\n    \"location\": \"New York\",\r\n    \"date\": \"2021-08-03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fitness_url}}/api/jogging/jogs/?filter=((date eq '2021-08-02') AND (jogger__id eq 5)) OR (distance gt 200)",
+							"host": [
+								"{{fitness_url}}"
+							],
+							"path": [
+								"api",
+								"jogging",
+								"jogs",
+								""
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "((date eq '2021-08-02') AND (jogger__id eq 5)) OR (distance gt 200)"
+								}
+							]
+						},
+						"description": "Returns a list of jog records depending on the role of the logged in user.\n\nIf the logged in user is a regular user or a user manager, only their own jog records are returned.\n\nIf the logged in user is an admin, jog records of the jogger specified in the request are returned. If no jogger is specified, admin's jog records are returned.\n\nThis endpoint supports parenthesis query filter and pagination."
+					},
+					"response": [
+						{
+							"name": "List Jog Record",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"jogger_id\": 1,\r\n    \"distance\": 800,\r\n    \"time\": 800,\r\n    \"location\": \"New York\",\r\n    \"date\": \"2021-08-03\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/jogging/jogs/?filter=(location eq 'New York') AND (distance ne 800.0)",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"jogging",
+										"jogs",
+										""
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "((date eq '2021-08-02') AND (jogger__id eq 5)) OR (distance gt 200)",
+											"disabled": true
+										},
+										{
+											"key": "filter",
+											"value": "(location eq 'New York') AND (distance ne 800.0)"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Aug 2021 20:37:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "205"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 2,\n            \"jogger\": \"updated_regular_swati\",\n            \"date\": \"2021-08-02\",\n            \"distance\": 700,\n            \"time\": 400,\n            \"location\": \"New York\",\n            \"weather\": \"Partly cloudy\",\n            \"jogger_id\": 1\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve Jog Record",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2021-08-02\",\r\n    \"distance\": 1400.0,\r\n    \"time\": 400.0,\r\n    \"location\": \"Paris\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fitness_url}}/api/jogging/jogs/2",
+							"host": [
+								"{{fitness_url}}"
+							],
+							"path": [
+								"api",
+								"jogging",
+								"jogs",
+								"2"
+							]
+						},
+						"description": "Returns jog record of the jog_id passed in URL.\n\nAdmins can access all jog records.\nUser managers and regular users can access only those records that are their own."
+					},
+					"response": [
+						{
+							"name": "Retrieve Jog Record",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date\": \"2021-08-02\",\r\n    \"distance\": 1400.0,\r\n    \"time\": 400.0,\r\n    \"location\": \"Paris\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/jogging/jogs/2",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"jogging",
+										"jogs",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Aug 2021 18:55:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "153"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"jogger\": \"updated_regular_swati\",\n    \"date\": \"2021-08-02\",\n    \"distance\": 700,\n    \"time\": 400,\n    \"location\": \"New York\",\n    \"weather\": \"Partly cloudy\",\n    \"jogger_id\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Jogging Weekly Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jogger_id\": 5,\r\n    \"date\": \"2021-08-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fitness_url}}/api/jogging/reports/weekly-averages/",
+							"host": [
+								"{{fitness_url}}"
+							],
+							"path": [
+								"api",
+								"jogging",
+								"reports",
+								"weekly-averages",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Jogging Weekly Report",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"jogger_id\": 5,\r\n    \"date\": \"2021-08-04\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/jogging/reports/weekly-averages/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"jogging",
+										"reports",
+										"weekly-averages",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Aug 2021 20:47:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "129"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"average_distance\": 200,\n    \"average_speed\": 0.5,\n    \"jogger_id\": 5,\n    \"week_start_date\": \"2021-08-02\",\n    \"week_end_date\": \"2021-08-08\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Add jog record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jogger\": 1,\r\n    \"distance\": 800,\r\n    \"time\": 100,\r\n    \"location\": \"Texas\",\r\n    \"date\": \"2021-08-05\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fitness_url}}/api/jogging/jogs/",
+							"host": [
+								"{{fitness_url}}"
+							],
+							"path": [
+								"api",
+								"jogging",
+								"jogs",
+								""
+							]
+						},
+						"description": "Adds jog record to Fitness App. Weather conditions on the day of jog are automatically populated in the record. \n\nAdmins can create and edit any jog record.\nUser managers and regular users can only create and edit their own records."
+					},
+					"response": [
+						{
+							"name": "Add jog record",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"jogger\": 1,\r\n    \"distance\": 800,\r\n    \"time\": 100,\r\n    \"location\": \"Texas\",\r\n    \"date\": \"2021-08-05\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{fitness_url}}/api/jogging/jogs/",
+									"host": [
+										"{{fitness_url}}"
+									],
+									"path": [
+										"api",
+										"jogging",
+										"jogs",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Aug 2021 20:25:18 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "150"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"jogger\": \"updated_regular_swati\",\n    \"date\": \"2021-08-05\",\n    \"distance\": 800,\n    \"time\": 100,\n    \"location\": \"Texas\",\n    \"weather\": \"Partly cloudy\",\n    \"jogger_id\": 1\n}"
+						}
+					]
+				}
+			],
+			"description": "Jogging related APIs"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDExNTkwLCJqdGkiOiI2MjNmMDZkYjQyZmY0NWE2YjAwNmU5YWFkYTliMzQyOCIsInVzZXJfaWQiOjR9.uqJR3EQPbD8DqhPvMvsuO3rxjCYDdhFSg3Jmz3_eJ_E",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": ""
+		}
+	]
+}
