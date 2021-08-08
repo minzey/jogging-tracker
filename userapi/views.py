@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
+from utils.filter_parser import PrecedenceQueryFilter
 from .models import FitnessUser
 from .serializers import FitnessStaffSerializer, FitnessUserSerializer
 from .permissions import IsUserManagerOrAdmin, IsRegularAndOwner
@@ -55,6 +56,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     permission_classes = (IsUserManagerOrAdmin,)
     serializer_class = FitnessStaffSerializer
+    filter_backends = (PrecedenceQueryFilter,)
 
     def get_queryset(self):
         all_users = FitnessUser.objects.all()
