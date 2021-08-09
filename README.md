@@ -1,5 +1,6 @@
 ![Jogging Representative Image](images/jogging_rep_image.jpg)
-#Fitness Jogging API App
+# Fitness Jogging API App
+
 Collection of APIs with 3 types of user roles to track jogging metrics.
 
 ## API Documentation
