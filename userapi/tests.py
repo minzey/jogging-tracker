@@ -129,17 +129,29 @@ class StaffSerializerTest(SerializerTest):
         self.assertEqual(manager.check_password(self.MANAGER_DATA.get('password')), True)
 
 
-class UserAPIViewTest(SerializerTest):
-
-    def get_authenticated_user_header(self, data=None):
+class BaseAPIViewTest(SerializerTest):
+    def get_user_header(self, data=None):
         UserAPIViewTest().user_register_view(data=data)
         _, token = UserAPIViewTest().login(data=data)
-        user = FitnessUser.objects.get(first_name__exact=data.get('first_name'))
+        user = FitnessUser.objects.get(username=data.get('username'))
 
         self.user = user
         self.token = token
 
         return user, token
+
+    def get_staff_header(self, data=None):
+        UserAPIViewTest().staff_register_view_with_logged_in_admin(data=data)
+        _, token = UserAPIViewTest().login(data=data)
+        user = FitnessUser.objects.get(id=data.get('id'))
+
+        self.user = user
+        self.token = token
+
+        return user, token
+
+
+class UserAPIViewTest(BaseAPIViewTest):
 
     def user_register_view(self, data=None):
         if data is None:
@@ -172,9 +184,12 @@ class UserAPIViewTest(SerializerTest):
         response, content = self.staff_register_view_without_logging_in(data=data)
         self.assertEqual(response.status_code, 401)
 
-    def staff_register_view_with_logged_in_admin(self, data=None):
-        if data is None:
+    def staff_register_view_with_logged_in_admin(self, data=None, role=None):
+        if data is None or role is None:
             data = self.MANAGER_DATA
+        elif role is not None:
+            data = self.MANAGER_DATA
+            data["role"] = role
 
         request = APIRequestFactory().post('/api/auth/users/', data=json.dumps(data), content_type="application/json")
         force_authenticate(request, user=self.create_admin(self.ADMIN_DATA))
@@ -329,3 +344,67 @@ class UserAPIViewTest(SerializerTest):
         response = self.user_delete_user(user_id=user_id, user=user, token=token, user_data=user_data)
         self.assertEqual(response.status_code, 204)
 
+class BaseEndToEndAPIViewTesting(BaseAPIViewTest):
+
+    def create_user(self, data):
+        UserAPIViewTest().user_register_view(data)
+        user = FitnessUser.objects.get(username=data.get('username'))
+        token = UserAPIViewTest().test_login(data)
+
+        return user, token
+
+    def create_manager(self, data):
+        UserAPIViewTest().staff_register_view_with_logged_in_admin(data, 1)
+        manager = FitnessUser.objects.get(username=data.get('username'))
+        token = UserAPIViewTest().test_login(data)
+        return manager, token
+
+    def create_admin(self, data):
+        UserAPIViewTest().staff_register_view_with_logged_in_admin(data, 2)
+        admin = FitnessUser.objects.get(username=data.get('username'))
+        token = UserAPIViewTest().test_login(data)
+        return admin, token
+
+class UserEndToEndAPIViewTesting(BaseEndToEndAPIViewTesting):
+    def user_journey_integration_testing(self):
+        data_1 = self.USER_DATA
+        data_2 = self.TEST_DATA
+
+        # CREATE USER 1
+        user_1, token = self.create_user(data_1)
+        # CREATE USER 2
+        user_2, token_2 = self.create_user(data_2)
+
+        # USER 1 CAN CRUD HIS DATA
+        UserAPIViewTest().test_user_get_user(user_1.pk, user_1, token)
+        UserAPIViewTest().test_user_update_user(user_1.pk, user_1, token)
+        UserAPIViewTest().test_user_delete_user(user_1.pk, user_1, token)
+
+        # CREATE USER AGAIN
+        user_1, token = self.create_user(data_1)
+
+        # USER 1 CANNOT CRUD USER 2 DATA
+        response, _ = UserAPIViewTest().user_get_user(user_2.pk, user_1, token)
+        self.assertEqual(response.status_code, 403)
+        response, _ = UserAPIViewTest().user_update_user(user_2.pk, user_1, token)
+        self.assertEqual(response.status_code, 403)
+        response = UserAPIViewTest().user_delete_user(user_2.pk, user_1, token)
+        self.assertEqual(response.status_code, 403)
+
+        ##### JOGGING
+
+        # USER 1 CAN CRUD HIS JOG
+        JogAPIViewTest().test_create_jog_without_logging_in(data)
+        jog_id = JogAPIViewTest().test_user_create_jog(user, token)
+        JogAPIViewTest().test_user_get_jog(jog_id, user, token)
+        JogAPIViewTest().test_user_update_jog(jog_id, user, token)
+        JogAPIViewTest().test_user_delete_jog(jog_id, user, token)
+
+        # USER 1 CANNOT CRUD 2 USER JOG
+        jog_id_2 = JogAPIViewTest().test_user_create_jog(user_2, token_2)
+        response, _ = JogAPIViewTest().user_get_jog(jog_id_2, user, token)
+        self.assertEqual(response.status_code, 403)
+        response, _ = JogAPIViewTest().user_update_jog(jog_id_2, user, token)
+        self.assertEqual(response.status_code, 403)
+        response = JogAPIViewTest().user_delete_jog(jog_id_2, user, token)
+        self.assertEqual(response.status_code, 403)
